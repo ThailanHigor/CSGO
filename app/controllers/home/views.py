@@ -4,4 +4,4 @@ from app import db
 
 @home.route("/", methods=["GET"])
 def index():
-    return render_template("home.html")
+    return render_template("Home/home.html")

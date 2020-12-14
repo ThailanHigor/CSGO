@@ -1,0 +1,83 @@
+.arma-radial{
+    width: 50px;
+    height: auto;
+}
+
+.aug img{
+    transform: rotate(208deg);
+    position: absolute;
+    top: 20px;
+    right: 76px;
+}
+.aug span{
+    left: 102px;
+    top: -5px;
+    transform: rotate(208deg);
+    position: absolute;
+}
+
+.m4a4 img{
+    transform: rotate(330deg);
+    position: absolute;
+    top: 11px;
+    right: 78px;
+}
+.m4a4 span{
+    left: 90px;
+    top: 31px;
+    transform: rotate(-28deg);
+    position: absolute;
+}
+
+.ssg08 img{
+    transform: rotate(265deg);
+    position: absolute;
+    top: 15px;
+    right: 80px;
+}
+.ssg08 span{
+    left: 100px;
+    top: 12px;
+    transform: rotate(-90deg);
+    position: absolute;
+}
+
+.famas img{
+    transform: rotate(27deg);
+    position: absolute;
+    top: 6px;
+    right: 74px;
+}
+.famas span{
+    left: 76px;
+    top: 28px;
+    transform: rotate(30deg);
+    position: absolute;
+}
+
+.scar20 img{
+    transform: rotate(88deg);
+    position: absolute;
+    top: 15px;
+    right: 67px;
+}
+.scar20 span{
+    left: 64px;
+    top: 12px;
+    transform: rotate(91deg);
+    position: absolute;
+}
+
+.awp img{
+    transform: rotate(149deg);
+    position: absolute;
+    top: 21px;
+    right: 72px;
+}
+.awp span{
+    left: 75px;
+    top: -2px;
+    transform: rotate(150deg);
+    position: absolute;
+}
+

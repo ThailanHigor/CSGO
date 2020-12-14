@@ -1,0 +1,41 @@
+.categoria-Pistolas span{
+    position: absolute;
+    top: 15px;
+    left: 79px;
+    transform: rotate(30deg);
+}
+
+.categoria-Pesadas span{
+    position: absolute;
+    top: 16px;
+    left: 79px;
+    transform: rotate(-30deg);
+}
+
+.categoria-SMGs span{
+    position: absolute;
+    top: 15px;
+    left: 88px;
+    transform: rotate(-90deg);
+}
+
+.categoria-Rifles span{
+    position: absolute;
+    top: 12px;
+    left: 85px;
+    transform: rotate(210deg);
+}
+
+.categoria-Luvas span{
+    position: absolute;
+    top: 13px;
+    left: 88px;
+    transform: rotate(150deg);
+}
+
+.categoria-Agentes span{
+    position: absolute;
+    top: 17px;
+    left: 81px;
+    transform: rotate(91deg);
+}
