@@ -47,21 +47,38 @@
                 <div class="edgtf-full-width">
                     <div class="edgtf-full-width-inner">
                         <div class="edgtf-grid-row">
-                            <div class="edgtf-page-content-holder edgtf-grid-col-12">
+                            <div class="edgtf-page-content-holder edgtf-grid-col-12"> 
+                                <input type="hidden" value="" class="category-selected-input" />
+                                <input type="hidden" value="" class="weapon-selected-input" />
+                                <input type="hidden" value="" class="skin-selected-input" />
 
-                                {% include  'partials/header_topo.html'%}
-
-                                {% include  'home/_banners.html' %}
-
-                         
-
-                                <!-- <div
-                                    class="vc_row wpb_row vc_row-fluid edgtf-mobile-row-left-alignment vc_custom_1572856762388 edgtf-content-aligment-right">
-                                    <div class="wpb_column vc_column_container vc_col-sm-12 menu-radial menu-categorias">  
+                                <div class="vc_row wpb_row vc_row-fluid edgtf-mobile-row-left-alignment vc_custom_1572856762388 ">
+                                    <div class="wpb_column vc_column_container vc_col-sm-12">
+                                        <h3 class="edgtf-st-title message-step" style="text-align: center;">
+                                            Primeiro, escolha a categoria da skin
+                                        </h3>
                                     </div>
-                                </div> -->
+                                </div>
 
-                                {% include  'home/StepSelection/PricesComparation.html' %}
+                                <!-- First Step -->
+                                {% include  'home/StepSelection/Categories.html' %}
+
+                                <!-- Second Step-->
+                                <div class="wpb_column vc_column_container vc_col-sm-12 menu-radial menu-categorias section-second-step" style="display: none;" >      
+                                    <ul class="active">
+                                       
+                                    </ul>
+                                </div>
+                                <!-- Third Step-->
+                                <div class="edgtf-stream-list-holder edgtf-grid-list edgtf-four-columns e5 section-third-step" style="width: 100%; display: none;">
+                                    <div class="edgtf-sb-stream-wrapper edgtf-outer-space section-third-step-itens">
+
+                                    </div>
+                                </div>
+
+                                <!-- First Step -->
+                                {% include  'home/StepSelection/TablePrices.html' %}
+
                             </div>
                         </div>
                     </div>
@@ -76,6 +93,5 @@
     {% endblock %}
 
     {% block scripts %}
-
 
     {% endblock %}
