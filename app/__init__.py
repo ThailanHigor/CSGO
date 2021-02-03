@@ -10,9 +10,8 @@ def create_app(config_name):
 
     db.init_app(app)
 
-    from .controllers.home import home as home_blueprint
-    from .controllers.steps import steps as steps_blueprint
-    app.register_blueprint(home_blueprint)
-    app.register_blueprint(steps_blueprint)
+    #register blueprints
+    from app import routes
+    routes.load(app)
 
     return app

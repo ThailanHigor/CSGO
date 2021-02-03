@@ -11,9 +11,8 @@ class Config():
 
 
 class Development(Config):
-    DEBUG = True
-    SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(base_dir, "portifolio.db")
-    UPLOAD_FOLDER = os.path.join(base_dir, 'app','static', 'uploads')
+    SQLALCHEMY_DATABASE_URI = os.environ["SQLALCHEMY_DATABASE_URI"]
+    SQLALCHEMY_TRACK_MODIFICATIONS = os.environ["SQLALCHEMY_TRACK_MODIFICATIONS"]
 
 
 config = {

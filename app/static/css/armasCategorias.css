@@ -33,9 +33,9 @@
     transform: rotate(150deg);
 }
 
-.categoria-Agentes span{
+.categoria-Facas span{
     position: absolute;
-    top: 17px;
-    left: 81px;
+    top: 13px;
+    left: 85px;
     transform: rotate(91deg);
 }

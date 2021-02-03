@@ -10,26 +10,27 @@ const steps = {
     },
     secondStep: function () {
         $(".radial-first-step").click(function () {
-            let slugSelected = $(this).data("slug");
+            let weapon_type_id = $(this).data("id");
+            $('.category-selected-input').val(weapon_type_id);
 
             $.ajax({
                 url: "/steps/getWeaponsByCategory",
-                data: { category: slugSelected },
+                data: { weapon_type_id: weapon_type_id },
                 type: 'GET',
                 dataType: "json",
             }).done(function (data) {
                 let secondRadial = "";
 
-                data.weapons.map(function (weapon) {
+                data.weapons.map((weapon, index) => {
                     secondRadial +=
                         `<li>
-                        <a href="javascript:void(0)" class="${weapon.Slug} radial-second-step" data-slug="${weapon.Slug}">
-                            <img class="arma-radial" src="/static/images/armasRadial/${weapon.Image}" alt="">
-                            <span>${weapon.Name}</span>
-                            <div></div>
-                        </a>
-                    </li>
-                    `
+                            <a href="javascript:void(0)" class="weapon-${index+1} radial-second-step" data-id="${weapon.id}" data-slug="${weapon.slug}" data-filter="${weapon.filter_term}">
+                                <img class="arma-radial" src="/static/images/armasRadial/${weapon.image}" alt="">
+                                <span>${weapon.name}</span>
+                                <div></div>
+                            </a>
+                        </li>
+                        `
                 });
 
                 secondRadial += `  <li class="close"><a href="javascript:void(0)"  style="border: none;"> </a></li>`
@@ -50,11 +51,13 @@ const steps = {
 
     thirdStep: function () {
         $("body").delegate(".radial-second-step", "click", (function () {
-            let weaponSelected = $(this).data("slug");
+            let weaponSelectedSlug= $(this).data("slug");
+            let weaponSelectedId = $(this).data("id");
+            $('.weapon-selected-input').val($(this).data("filter"));
 
             $.ajax({
                 url: "/steps/getSkinsFromWeapon",
-                data: { weaponSelected: weaponSelected },
+                data: { weaponSelectedSlug: weaponSelectedSlug, weaponSelectedId: weaponSelectedId },
                 type: 'GET',
                 dataType: "json",
             }).done(function (data) {
@@ -62,13 +65,13 @@ const steps = {
 
                 data.skins.map(function (skin) {
                     skinsList +=
-                        `<div class="edgtf-sb-main-stream-item edgtf-item-space skin-item-third-step" data-slug="${skin.Slug}">
+                        `<div class="edgtf-sb-main-stream-item edgtf-item-space skin-item-third-step" data-id="${skin.id}" data-slug="${skin.slug}" data-filter="${skin.filter_term}">
                         <div class="edgtf-sb-main-stream-holder box-skin">
-                            <img src="/static/images/skins/${skin.Image}" class="attachment-full"> 
+                            <img src="/static/images/skins${skin.image}" class="attachment-full"> 
                             <div class="edgtf-sb-text-holder box-holder">
-                                <div class="edgtf-sb-channel">${skin.Category}</div>
+                                <div class="edgtf-sb-channel">${skin.category}</div>
                                 <h3 class="edgtf-sb-title">
-                                    ${skin.Name} </h3>
+                                    ${skin.name} </h3>
                             </div>
                         </div>
                     </div>`
@@ -92,11 +95,14 @@ const steps = {
 
     finalStep: function () {
         $("body").delegate(".skin-item-third-step", "click", (function () {
-            let skinSelected = $(this).data("slug");
+            let skinSelected = $(this).data("filter");
+            let skinSelectedId = $(this).data("id");
+            let weaponSelected = $(".weapon-selected-input").val();
+            $('.skin-selected-input').val($(this).data("filter"));
 
             $.ajax({
                 url: "/steps/getSkinInfo",
-                data: { skinSelected: skinSelected },
+                data: { skinSelected: skinSelected, weaponSelected: weaponSelected, skinSelectedId: skinSelectedId },
                 type: 'GET',
                 dataType: "json"
             }).done(function (data) {
@@ -107,9 +113,9 @@ const steps = {
                     priceTable +=
                         `<tr>
                             <th scope="row">${data.Float}</th>
-                            <td><a href="${data.LinkBleik}">${data.PriceBleik}</a></td>
-                            <td><a href="${data.LinkCSGOStore}">${data.PriceCSGOStore}</a></td>
-                            <td><a href="${data.LinkNesha}">${data.PriceNesha}</a></td>
+                            <td><a href="${data.LinkBleik}" target="__blank">${data.PriceBleik}</a></td>
+                            <td><a href="${data.LinkCSGOStore}" target="__blank">${data.PriceCSGOStore}</a></td>
+                            <td><a href="${data.LinkNesha}" target="__blank">${data.PriceNesha}</a></td>
                         </tr>`
 
                 });
@@ -117,7 +123,7 @@ const steps = {
                 $(".section-final-step .table-comparation tbody").html(priceTable);
 
                 $(".title-final-step").text(data.name);
-                $(".image-final-step").attr("src", `/static/images/skins/${data.image}`);
+                $(".image-final-step").attr("src", `/static/images/skins${data.image}`);
 
                 $(".section-third-step").hide();
                 $(".section-final-step").hide();
@@ -126,6 +132,8 @@ const steps = {
                 $(".message-step").hide();
                 $(".message-step").text(data.message);
                 $(".message-step").fadeIn(500);
+
+
             });
 
         }));

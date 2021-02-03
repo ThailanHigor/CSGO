@@ -10,78 +10,80 @@
     height: auto;
 }
 
-.aug img{
-    transform: rotate(208deg);
-    position: absolute;
-    top: 20px;
-    right: 76px;
-}
-.aug span{
-    left: 102px;
-    top: -5px;
-    transform: rotate(208deg);
-    position: absolute;
-}
 
-.m4a4 img{
-    transform: rotate(330deg);
-    position: absolute;
-    top: 11px;
-    right: 78px;
-}
-.m4a4 span{
-    left: 90px;
-    top: 31px;
-    transform: rotate(-28deg);
-    position: absolute;
-}
-
-.ssg08 img{
-    transform: rotate(265deg);
-    position: absolute;
-    top: 15px;
-    right: 80px;
-}
-.ssg08 span{
-    left: 100px;
-    top: 12px;
-    transform: rotate(-90deg);
-    position: absolute;
-}
-
-.famas img{
+.weapon-1 img{
     transform: rotate(27deg);
     position: absolute;
     top: 6px;
     right: 74px;
 }
-.famas span{
+.weapon-1 span{
     left: 76px;
     top: 28px;
     transform: rotate(30deg);
     position: absolute;
 }
 
-.scar20 img{
+
+.weapon-2 img{
+    transform: rotate(330deg);
+    position: absolute;
+    top: 11px;
+    right: 78px;
+}
+.weapon-2 span{
+    left: 90px;
+    top: 31px;
+    transform: rotate(-28deg);
+    position: absolute;
+}
+
+.weapon-3 img{
+    transform: rotate(265deg);
+    position: absolute;
+    top: 15px;
+    right: 80px;
+}
+.weapon-3 span{
+    left: 100px;
+    top: 12px;
+    transform: rotate(-90deg);
+    position: absolute;
+}
+
+.weapon-4 img{
+    transform: rotate(208deg);
+    position: absolute;
+    top: 20px;
+    right: 76px;
+}
+.weapon-4 span{
+    left: 102px;
+    top: -5px;
+    transform: rotate(208deg);
+    position: absolute;
+}
+
+.weapon-6 img{
     transform: rotate(88deg);
     position: absolute;
     top: 15px;
     right: 67px;
 }
-.scar20 span{
+.weapon-6 span{
     left: 64px;
     top: 12px;
     transform: rotate(91deg);
     position: absolute;
 }
 
-.awp img{
+.weapon-5 img{
     transform: rotate(149deg);
     position: absolute;
     top: 21px;
     right: 72px;
 }
-.awp span{
+.weapon-5 span{
     left: 75px;
     top: -2px;
     transform: rotate(150deg);

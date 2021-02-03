@@ -4,75 +4,93 @@ from app import db
 from app.models.Weapon import Weapon
 from app.models.Skin import Skin
 from app.models.PriceTable import PriceTable
+from app.services.Search.Scraping import Scraping
 
 @steps.route("/steps/getWeaponsByCategory", methods=["GET"])
 def getWeaponsByCategory():
-    category = request.args.get('category')
-    print(category)
+    weapon_type_id = request.args.get('weapon_type_id')
+    print(weapon_type_id)
     
-    weapons = []
-    weapons.append(Weapon("FAMAS", "", "", "famas.png","", "famas", 1, "rifle"))
-    weapons.append(Weapon("M4A4", "", "", "m4a4.png","", "m4a4", 2, "rifle"))
-    weapons.append(Weapon("SSG 08", "", "", "ssg08.png","", "ssg08", 3, "rifle"))
-    weapons.append(Weapon("AUG", "", "", "aug.png","", "aug", 4, "rifle"))
-    weapons.append(Weapon("AWP", "", "", "awp.png","", "awp", 5, "rifle"))
-    weapons.append(Weapon("SCAR-20", "", "", "scar20.png","", "scar20", 6, "rifle"))
+    weapons = Weapon.query.filter(Weapon.weaponType_id == weapon_type_id).all()
     message = "Nice escolha pra fechar o inventário em!"
-    result = [d.__dict__ for d in weapons]
-    
-    return jsonify(weapons=result, message=message, category=category)
+    result = [
+        {
+            'id': weapon.id, 
+            'name': weapon.name, 
+            "weaponType_id": weapon.weaponType_id, 
+            "slug": weapon.slug, 
+            "filter_term": weapon.filterTerm,
+            "image": weapon.image
+        } for weapon in weapons
+    ]
+
+    return jsonify(weapons=result, message=message)
 
 
 @steps.route("/steps/getSkinsFromWeapon", methods=["GET"])
 def getSkinsFromWeapon(): 
-    weaponSelected = request.args.get('weaponSelected')
-    print(weaponSelected)
+    weaponSelectedSlug = request.args.get('weaponSelectedSlug')
+    weaponSelectedId = request.args.get('weaponSelectedId')
+    print(weaponSelectedSlug)
+    print(weaponSelectedId)
     
-    skins = []
-    skins.append(Skin("The Emperor", "", "/m4a4/m4a4-emperor.png", "the-emperor", "rifle"))
-    skins.append(Skin("Asiimov", "", "/m4a4/m4a4-Asiimov.png", "the-emperor", "rifle"))
-    skins.append(Skin("The Battlestar", "", "/m4a4/m4a4-battlestar.png", "the-emperor", "rifle"))
-    skins.append(Skin("Bullet Rain", "", "/m4a4/m4a4-bulletRain.png", "the-emperor", "rifle"))
-    skins.append(Skin("Buzz Kill", "", "/m4a4/m4a4-buzzkill.png", "the-emperor", "rifle"))
-    skins.append(Skin("Cyber Security ", "", "/m4a4/m4a4-cyberSecurity.png", "the-emperor", "rifle"))
-    skins.append(Skin("Desolate Space", "", "/m4a4/m4a4-desolateSpace.png", "the-emperor", "rifle"))
-    skins.append(Skin("Evil Daimyo", "", "/m4a4/m4a4-evilDaymio.png", "the-emperor", "rifle"))
-    skins.append(Skin("Howl", "", "/m4a4/m4a4-howl.png", "the-emperor", "rifle"))
-    skins.append(Skin("Neo-Noir", "", "/m4a4/m4a4-neoNoir.png", "the-emperor", "rifle"))
-    skins.append(Skin("Royal Paladin", "", "/m4a4/m4a4-royalPaladin.png", "the-emperor", "rifle"))
-    skins.append(Skin("Tornado", "", "/m4a4/m4a4-tornado.png", "the-emperor", "rifle"))
-
+    skins = Skin.query.order_by(Skin.order).filter(Skin.weapon_id == weaponSelectedId).all()
     message = "Agora é só escolher a skin!"
-    result = [d.__dict__ for d in skins]
+    result = [
+        {
+            'id': skin.id, 
+            'name': skin.name, 
+            "weaponType_id": skin.weapon_id, 
+            "slug": skin.slug, 
+            "filter_term": skin.filterTerm,
+            "image": skin.image,
+            "category": skin.category
+        } for skin in skins
+    ]
     
-    return jsonify(skins=result, message=message, weaponSelected=weaponSelected)
+    return jsonify(skins=result, message=message)
 
 
 @steps.route("/steps/getSkinInfo", methods=["GET"])
 def getSkinInfo():
-    category = request.args.get('category')
-    print(category)
+    skin_selected = request.args.get('skinSelected')
+    skinSelectedId = request.args.get('skinSelectedId')
+    weapon_selected_filter_name = request.args.get('weaponSelected')
+    print(skin_selected)
+    print(weapon_selected_filter_name)
+    print(skinSelectedId)
+
+    skin = Skin.query.filter(Skin.id == skinSelectedId).first()
+    results = Scraping().search_skin(skin_selected)
     
     prices = []
+    floats = {
+        "FN Factory New": "Nova de Fábrica (FN)",
+        "MW Minimal Wear": "Pouco Usada (MW)", 
+        "FT Field-Tested": "Testada em Campo (FT)", 
+        "WW Well-Worn": "Bem Desgastada (WW)", 
+        "BS Battle-Scarred": "Veterana de Guerra (BS)"
+    }
 
-    priceFN = PriceTable("Nova de Fábrica (FN)", "-", "R$ 85,00", "R$ 78,00")
-    prices.append(priceFN)
+    for key, value in floats.items():
+        priceTableItem = PriceTable(value)
 
-    priceMW = PriceTable("Pouco Usada (MW)", "R$ 115,00", "R$ 85,00", "-")
-    prices.append(priceMW)
-
-    priceBT = PriceTable("Testada em Campo (BT)", "R$ 115,00", "-", "R$ 78,00")
-    prices.append(priceBT)
-
-    priceWW = PriceTable("Bem Desgastada (WW)", "-", "R$ 85,00", "R$ 78,00")
-    prices.append(priceWW)
-
-    priceBS = PriceTable("Veterana de Guerra (BS)", "R$ 115,00", "R$ 85,00", "R$ 78,00")
-    prices.append(priceBS)
-
-
+        for result in results:     
+            print(key, result)
+            if(key.split(" ")[0] in result.name or key.split(" ")[1] in result.name):
+                if(result.store == "CSGO Store"): 
+                    priceTableItem.PriceCSGOStore = result.price
+                    priceTableItem.LinkCSGOStore = result.link
+                elif(result.store == "NeshaStore"):
+                    priceTableItem.PriceNesha = result.price
+                    priceTableItem.LinkNesha = result.link
+                elif(result.store == "BleikStore"):
+                    priceTableItem.PriceBleik = result.price
+                    priceTableItem.LinkBleik = result.link
+        
+        prices.append(priceTableItem)
 
     message = "É isso, se liga nos preços aí!"
     result = [d.__dict__ for d in prices]
     
-    return jsonify(prices=result, message=message, name="The Emperor", image="/m4a4/m4a4-emperor.png" )
+    return jsonify(prices=result, message=message, name=skin.name, image=skin.image )

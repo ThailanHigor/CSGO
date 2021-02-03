@@ -1,35 +1,13 @@
 <div class="wpb_column vc_column_container vc_col-sm-12 menu-radial menu-categorias section-first-step" >   
     <ul class="active">
-        <li>
-            <a href="javascript:void(0)" class="categoria-Pistolas radial-first-step" data-slug="pistolas">
-                <span>Pistolas</span>
-            </a>
-        </li>
-        <li>
-            <a href="javascript:void(0)" class="categoria-Pesadas radial-first-step" data-slug="pesadas">
-                <span>Pesadas</span>   
-            </a>
-        </li>
-        <li>
-            <a href="javascript:void(0)" class="categoria-SMGs radial-first-step" data-slug="smgs">
-                <span>SMGs</span>
-            </a>
-        </li>
-        <li>
-            <a href="javascript:void(0)" class="categoria-Rifles radial-first-step" data-slug="rifles">
-                <span>Rifles</span>
-            </a>
-        </li>
-        <li>
-            <a href="javascript:void(0)" class="categoria-Luvas radial-first-step" data-slug="luvas">
-                <span>Luvas</span>      
-            </a>
-        </li>
-        <li>
-            <a href="javascript:void(0)" class="categoria-Agentes radial-first-step" data-slug="agentes">
-                <span>Agentes</span>
-            </a>
-        </li>
+        {% for weapon in weaponsTypes %}
+            <li>
+                <a href="javascript:void(0)" class="categoria-{{weapon.name}} radial-first-step" data-id="{{weapon.id}}">
+                    <span>{{weapon.name}}</span>
+                </a>
+            </li>
+        {% endfor %}
+
         <li class="close">
             <a href="javascript:void(0)" style="border: none;"></a>
         </li>
