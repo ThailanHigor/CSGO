@@ -3,8 +3,9 @@ import requests
 from bs4 import BeautifulSoup
 from app.models.Weapon import Weapon
 import re
+import asyncio
 
-def search_in_BleikStore(text):
+async def search_in_BleikStore(text):
     url = f"https://bleikstore.com/index.php?route=product/search&\
     sort=p.price&order=DESC&search={text}&limit=500"
     
@@ -27,7 +28,7 @@ def search_in_BleikStore(text):
             pattern = r"([\d,.]+)" 
             price = re.findall(pattern, price)[0]
             
-            weapon = Weapon(name, link, price, image, "BleikStore",name, 1, "Rifle", name)
+            weapon = Weapon(name, link, price, image, "BleikStore",name, 1, "Rifle", name, "StatTrak" in name)
             weapon_list.append(weapon)
             
     return weapon_list

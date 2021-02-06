@@ -34,7 +34,7 @@
             </div>
         </div>
 
-        {% include  'partials/header_aside.html'%}
+        {% include 'partials/header_aside.html'%}
 
         <a id='edgtf-back-to-top' href='#'>
             <span class="edgtf-icon-stack">
@@ -47,12 +47,13 @@
                 <div class="edgtf-full-width">
                     <div class="edgtf-full-width-inner">
                         <div class="edgtf-grid-row">
-                            <div class="edgtf-page-content-holder edgtf-grid-col-12"> 
+                            <div class="edgtf-page-content-holder edgtf-grid-col-12">
                                 <input type="hidden" value="" class="category-selected-input" />
                                 <input type="hidden" value="" class="weapon-selected-input" />
                                 <input type="hidden" value="" class="skin-selected-input" />
 
-                                <div class="vc_row wpb_row vc_row-fluid edgtf-mobile-row-left-alignment vc_custom_1572856762388 ">
+                                <div
+                                    class="vc_row wpb_row vc_row-fluid edgtf-mobile-row-left-alignment vc_custom_1572856762388 ">
                                     <div class="wpb_column vc_column_container vc_col-sm-12">
                                         <h3 class="edgtf-st-title message-step" style="text-align: center;">
                                             Primeiro, escolha a categoria da skin
@@ -60,24 +61,33 @@
                                     </div>
                                 </div>
 
+
+
                                 <!-- First Step -->
-                                {% include  'home/StepSelection/Categories.html' %}
+                                {% include 'home/StepSelection/Categories.html' %}
 
                                 <!-- Second Step-->
-                                <div class="wpb_column vc_column_container vc_col-sm-12 menu-radial menu-categorias section-second-step" style="display: none;" >      
-                                    <ul class="active">
-                                       
-                                    </ul>
+                                <!-- Radial -->
+                                <div class="wpb_column vc_column_container vc_col-sm-12 menu-radial menu-categorias section-second-step" style="display: none;">
+                                    <ul class="active"></ul>
                                 </div>
+                                <!-- Knives -->
+                                <div class="vc_col-sm-12 edgtf-team-list-holder edgtf-grid-list edgtf-disable-bottom-space edgtf-four-columns edgtf-normal-space section-second-step section-second-step-knives" style="display: none;">
+                                    <div class="edgtf-pl-inner edgtf-outer-space"> </div>
+                                </div>
+
+                                <!-- end Second Step-->
+
                                 <!-- Third Step-->
-                                <div class="edgtf-stream-list-holder edgtf-grid-list edgtf-four-columns e5 section-third-step" style="width: 100%; display: none;">
+                                <div class="edgtf-stream-list-holder edgtf-grid-list edgtf-four-columns e5 section-third-step"
+                                    style="width: 100%; display: none;">
                                     <div class="edgtf-sb-stream-wrapper edgtf-outer-space section-third-step-itens">
 
                                     </div>
                                 </div>
 
                                 <!-- First Step -->
-                                {% include  'home/StepSelection/TablePrices.html' %}
+                                {% include 'home/StepSelection/TablePrices.html' %}
 
                             </div>
                         </div>
@@ -85,7 +95,7 @@
                 </div>
             </div>
 
-            {% include  'home/_footer.html' %}
+            {% include 'home/_footer.html' %}
 
         </div>
     </div>

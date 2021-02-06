@@ -134,7 +134,9 @@
   position: absolute;
   left: calc(50% - 18px);
   top: calc(50% - 16px);
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   -moz-transform: scale(3.8) rotate(45deg);
   -ms-transform: scale(3.8) rotate(45deg);
   -webkit-transform: scale(3.8) rotate(45deg);
@@ -144,19 +146,15 @@
   -webkit-transition: ease-in-out 0.3s all;
   transition: ease-in-out 0.3s all;
   -webkit-transform-origin: 50% 50%;
+  transform: rotate(30deg);
 }
-.menu-radial ul li.close a {
-  background: none;
-  width: 35px;
-  height: 35px;
-  color: #ccc;
+.menu-radial ul li.close img {
+  width: 95%;
 }
 .menu-radial ul.active {
   transform: rotate(-30deg) scale(2.5);
 }
-.menu-radial ul.active .close {
-  transform: rotate(0deg);
-}
+
 .menu-radial{
   min-height: 405px;
   display: flex;
@@ -205,8 +203,8 @@ table tbody th, table tbody tr, table thead th, table thead tr{
 }
 
 .table-comparation .image-logo{
-  width: 200px;
-  margin-bottom: 45px;
+  width: 150px;
+  margin-bottom: 15px;
 }
 
 .table-comparation .coluna-logo{
@@ -217,3 +215,10 @@ table tbody th, table tbody tr, table thead th, table thead tr{
   text-align: left;
   font-weight: 600;
 }
+.image-change-weapon{
+  width: 14px;
+  right: 60px !important;
+  top: 12px !important;
+  z-index: 99999999;
+}
+

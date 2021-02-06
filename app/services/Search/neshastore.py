@@ -3,11 +3,12 @@ import requests
 from bs4 import BeautifulSoup
 from app.models.Weapon import Weapon
 import re
+import asyncio
 
-def search_in_NeshaStore(text):
+async def search_in_NeshaStore(text):
 
     url = f"http://www.neshastore.com/index.php?route=product/search&\
-    sort=p.price&order=DESC&search&search={text}&limit=100"
+    sort=p.price&order=DESC&search&search={text}&limit=100&description=true"
     
     weapon_list = []
     pattern = r"([\d,.]+)" 
@@ -30,7 +31,7 @@ def search_in_NeshaStore(text):
              
                 price = re.findall(pattern, price)[0]
                 
-                weapon = Weapon(name, link, price, image, "NeshaStore",name, 1, "Rifle", name)
+                weapon = Weapon(name, link, price, image, "NeshaStore",name, 1, "Rifle", name, "StatTrak" in name)
                 weapon_list.append(weapon)
                 
     return weapon_list

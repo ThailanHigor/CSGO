@@ -2,8 +2,10 @@ class PriceTable():
     def __init__(self, float):
         self.Float = float
         self.PriceBleik = "-",
-        self.LinkBleik = "linkteste",
+        self.LinkBleik = "#",
         self.PriceCSGOStore = "-",
-        self.LinkCSGOStore = "linkteste",
+        self.LinkCSGOStore = "#",
         self.PriceNesha = "-",
-        self.LinkNesha = "linkteste",
+        self.LinkNesha = "#",
+        self.PriceSteam = "-",
+        self.LinkSteam = "#",

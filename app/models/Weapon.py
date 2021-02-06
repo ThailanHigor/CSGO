@@ -14,9 +14,11 @@ class Weapon(db.Model):
     filterTerm = db.Column(db.String(255))
     weaponType_id = db.Column(db.Integer, db.ForeignKey('WeaponTypes.id'),nullable=False)
     skins = db.relationship('Skin', backref='Weapon', lazy=True)
-
-
-    def __init__(self, name, link, price, image, store, slug, order, category, filterTerm):
+    stattrak = db.Column(db.Boolean)
+    team = db.Column(db.String(5))
+    weaponVariable = db.Column(db.Integer)
+    
+    def __init__(self, name, link, price, image, store, slug, order, category, filterTerm, stattrak):
        self.name = name
        self.link = link
        self.price = price
@@ -26,6 +28,7 @@ class Weapon(db.Model):
        self.order = order
        self.category = category
        self.filterTerm = filterTerm
+       self.stattrak = stattrak
 
     def __str__(self):
-        return f"{self.name} | {self.price} | {self.store} | {self.link} | {self.weaponType_id}" 
+        return f"{self.name} | {self.price} | {self.store} | {self.link} | {self.weaponType_id} | {self.stattrak}" 
