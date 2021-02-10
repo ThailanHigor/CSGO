@@ -4,15 +4,38 @@ from app import db
 from app.models.Weapon import Weapon
 from app.models.Skin import Skin
 from app.models.PriceTable import PriceTable
+from app.models import WeaponType
 from app.services.Search.Scraping import search_skin
 import asyncio
 from sqlalchemy import and_, or_
+from flask_cors import cross_origin
 
-@steps.route("/steps/getWeaponsByCategory", methods=["GET"])
+@steps.route("/api/weaponTypes", methods=["POST"])
+@cross_origin()
+def getWeaponsTypes():
+    weaponsTypes = WeaponType.query.order_by(WeaponType.order).all()
+        
+    message = "Nice escolha pra fechar o inventário em!"
+    result = [
+        {
+            'id': weaponsType.id, 
+            'name': weaponsType.name, 
+            "slug": weaponsType.slug
+        } for weaponsType in weaponsTypes
+    ]
+    response = jsonify(weaponTypes=result, message=message)
+    # response.headers.add("Access-Control-Allow-Origin", "*")
+
+    return response
+
+
+@steps.route("/api/getWeaponsByCategory", methods=["POST"])
+@cross_origin()
 def getWeaponsByCategory():
-    weapon_type_id = request.args.get('weapon_type_id')
-    team_name = request.args.get('team_name')
-    
+    request_data  = request.get_json()
+    weapon_type_id = request_data['weapon_type_id']
+    team_name = request_data['team_name']
+
     weapons = Weapon.query.order_by(Weapon.order).filter(
         and_(Weapon.weaponType_id == weapon_type_id, Weapon.weaponVariable == None, 
             or_(Weapon.team == team_name, Weapon.team == "ALL")
@@ -31,14 +54,17 @@ def getWeaponsByCategory():
     ]
 
     is_knife = weapon_type_id == "6"
-    return jsonify(weapons=result, flag_knives=is_knife, message=message)
+    response = jsonify(weapons=result, flag_knives=is_knife, message=message)
+    # response.headers.add("Access-Control-Allow-Origin", "*")
+
+    return response
 
 
-@steps.route("/steps/getSkinsFromWeapon", methods=["GET"])
+@steps.route("/api/getSkinsFromWeapon", methods=["POST"])
 def getSkinsFromWeapon(): 
-    weaponSelectedSlug = request.args.get('weaponSelectedSlug')
-    weaponSelectedId = request.args.get('weaponSelectedId')
-    print(weaponSelectedSlug)
+    request_data  = request.get_json()
+
+    weaponSelectedId = request_data['weaponSelectedId']
     print(weaponSelectedId)
     
     skins = Skin.query.order_by(Skin.order).filter(Skin.weapon_id == weaponSelectedId).all()
@@ -58,13 +84,11 @@ def getSkinsFromWeapon():
     return jsonify(skins=result, message=message)
 
 
-@steps.route("/steps/getSkinInfo", methods=["GET"])
+@steps.route("/api/getSkinInfo", methods=["POST"])
 def getSkinInfo():
-    skin_selected = request.args.get('skinSelected')
-    skinSelectedId = request.args.get('skinSelectedId')
-    weapon_selected_filter_name = request.args.get('weaponSelected')
-    print(skin_selected)
-    print(weapon_selected_filter_name)
+    request_data  = request.get_json()
+    skinSelectedId = request_data['skin_selected_id']
+
     print(skinSelectedId)
 
     skin = Skin.query.filter(Skin.id == skinSelectedId).first()
@@ -136,21 +160,3 @@ def getSkinInfo():
     result_stattrak = [d.__dict__ for d in prices_stattrak]
     
     return jsonify(prices_normals=result_normals, price_stattrak=result_stattrak, message=message, name=skin.name, image=skin.image )
-
-
-# @steps.route("/steps/TranslateToBR", methods=["GET"])
-# def translateToBR():
-#     import requests
-    
-#     skins = Skin.query.all()
-  
-#     for skin in skins:
-#         print("original:", skin.filterTerm)
-#         cookie = {'steamLoginSecure': '76561198360624224%7C%7C8245D5D158B280E3FB133B8F9A7F081B0448F1EA'}    
-#         url = f"https://steamcommunity.com/market/search/render/?appid=730&currency=7&country=BR&norender=1&count=1&query={skin.filterTerm}"
-#         print(url)
-#         page = requests.get(url, cookies=cookie)
-#         response = page.json()
-#         print("traduzido:", (response["results"]))
-#         print()
-    
