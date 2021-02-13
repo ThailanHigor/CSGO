@@ -1,5 +1,6 @@
 Flask
-Jinja2
 Flask-SQLAlchemy
 SQLAlchemy
 Flask-Migrate
+flask_script
+flask_restful
