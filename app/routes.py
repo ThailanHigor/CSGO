@@ -1,7 +1,13 @@
-def load(app):    
-    from .controllers.weapons import weapons as weapons_blueprint
-    app.register_blueprint(weapons_blueprint)
 
-    from .controllers.skins import skins as skins_blueprint
-    app.register_blueprint(skins_blueprint)
+def load(api):    
+    from .controllers.Weapons import Weapons
+    api.add_resource(Weapons, "/weapons")
+
+    from .controllers.WeaponsTypes import WeaponsTypes
+    api.add_resource(WeaponsTypes, "/weapon_types")
+
+    from .controllers.Skins import Skins
+    api.add_resource(Skins, "/skins")
     
+    from .controllers.SkinScraping import SkinScraping
+    api.add_resource(SkinScraping, "/skins-price")

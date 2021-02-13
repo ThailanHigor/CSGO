@@ -1,13 +1,8 @@
-from app import db, create_app
 import os
-from flask_migrate import Migrate
-from app.models import WeaponType
-from app.models import Weapon
-from app.models import Skin
-from app.models import RandomMessage
+from app import db, create_app
+from app.models import WeaponType, Weapon, Skin, RandomMessage
 
 app = create_app(os.environ["FLASK_ENV"])
-migrate=Migrate(app, db)
  
 @app.shell_context_processor
 def make_shell_processor():
