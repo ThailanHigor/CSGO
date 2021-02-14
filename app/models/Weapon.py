@@ -1,3 +1,4 @@
+from sqlalchemy.sql.expression import null
 from app import db
 
 class Weapon(db.Model):    
@@ -17,7 +18,9 @@ class Weapon(db.Model):
     stattrak = db.Column(db.Boolean)
     team = db.Column(db.String(5))
     weaponVariable = db.Column(db.Integer)
-    
+
+    variable = None
+
     def __init__(self, name, link, price, image, store, slug, order, category, filterTerm, stattrak):
        self.name = name
        self.link = link
@@ -31,4 +34,7 @@ class Weapon(db.Model):
        self.stattrak = stattrak
 
     def __str__(self):
-        return f"{self.name} | {self.price} | {self.store} | {self.link} | {self.weaponType_id} | {self.stattrak}" 
+        return f"{self.name} | {self.price} | {self.store} | {self.link} | {self.weaponType_id} | {self.stattrak} | {self.weaponVariable}" 
+
+    def setWeaponVariable(self, variable_weapon):
+        self.variable = variable_weapon

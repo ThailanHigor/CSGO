@@ -11,7 +11,15 @@ weapon_fields = {
     "name": fields.String,
     "slug": fields.String,
     "weaponType_id": fields.Integer, 
-    "filter_term": fields.String,
-    "image": fields.String
+    "filterTerm": fields.String,
+    "image": fields.String,
+    "variable": fields.Nested({
+        "id": fields.Integer,
+        "name": fields.String,
+        "slug": fields.String,
+        "weaponType_id": fields.Integer, 
+        "filterTerm": fields.String,
+        "image": fields.String,
+    })
 }
 
