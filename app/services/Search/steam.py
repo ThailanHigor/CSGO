@@ -25,8 +25,8 @@ async def search_in_Steam(text):
             name = product.find("div",{"class":"market_listing_row market_recent_listing_row market_listing_searchresult"}).get("data-hash-name")
             price_text = product.find("span",{"class":"normal_price"}).find("span",{"class":"normal_price"}).getText().replace("$","").replace(" USD","")
             price = "%.2f" %(float(price_text.replace(",","")) * float(cotacao_dolar_atual))
-                        
-            weapon = Weapon(name, link, price, "", "Steam", name, 1, "", name, "StatTrak" in name)
+            price_format = f'R$ {price.replace(".",",")}'
+            weapon = Weapon(name, link, price_format, "", "Steam", name, 1, "", name, "StatTrak" in name)
             weapon_list.append(weapon)
        
     return weapon_list

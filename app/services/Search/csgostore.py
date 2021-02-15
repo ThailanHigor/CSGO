@@ -23,8 +23,8 @@ async def search_in_CSGOStore(text):
             
             pattern = r"([\d,.]+)" 
             price = re.findall(pattern, price)[0]
-            
-            weapon = Weapon(name,link,price,image, "CSGO Store",name, 1, "Rifle", name, "StatTrak" in name)
+            price_format = f'R$ {price}'
+            weapon = Weapon(name,link, price_format, image, "CSGO Store",name, 1, "Rifle", name, "StatTrak" in name)
             weapon_list.append(weapon)
             
     return weapon_list

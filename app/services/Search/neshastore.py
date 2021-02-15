@@ -30,8 +30,8 @@ async def search_in_NeshaStore(text):
                 
              
                 price = re.findall(pattern, price)[0]
-                
-                weapon = Weapon(name, link, price, image, "NeshaStore",name, 1, "Rifle", name, "StatTrak" in name)
+                price_format = f'R$ {price}'
+                weapon = Weapon(name, link, price_format, image, "NeshaStore",name, 1, "Rifle", name, "StatTrak" in name)
                 weapon_list.append(weapon)
                 
     return weapon_list
