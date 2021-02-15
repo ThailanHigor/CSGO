@@ -18,6 +18,8 @@ class Weapon(db.Model):
     stattrak = db.Column(db.Boolean)
     team = db.Column(db.String(5))
     weaponVariable = db.Column(db.Integer)
+    topCSS = db.Column(db.String(255))
+    leftCSS = db.Column(db.String(255))
 
     variable = None
 
