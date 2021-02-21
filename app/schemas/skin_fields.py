@@ -7,7 +7,12 @@ skin_fields = {
     "slug": fields.String, 
     "filter_term": fields.String,
     "image": fields.String,
-    "category": fields.String
+    "category": fields.String,
+    "views": fields.Integer,
+    "weapon": fields.Nested({
+        "id": fields.Integer,
+        "name": fields.String,
+    })
 }
 
 

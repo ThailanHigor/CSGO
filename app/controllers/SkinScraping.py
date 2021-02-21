@@ -76,4 +76,4 @@ class SkinScraping(Resource):
         result_normals = marshal(prices_normals, skin_price_table_fields)
         result_stattrak = marshal(prices_stattrak, skin_price_table_fields)
         
-        return jsonify(prices_normals=result_normals, price_stattrak=result_stattrak, name=skin.name, image=skin.image)
+        return jsonify(name=skin.name, image=skin.image, weapon=skin.weapon.name, prices_normals=result_normals, price_stattrak=result_stattrak)

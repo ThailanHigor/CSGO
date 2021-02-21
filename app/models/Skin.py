@@ -13,7 +13,9 @@ class Skin(db.Model):
     filterTerm_br = db.Column(db.String(255))
     category = db.Column(db.String(255))
     weapon_id = db.Column(db.Integer, db.ForeignKey('Weapons.id'), nullable=False)
-
+    weapon = db.relationship('Weapon', back_populates = 'skins')
+    views = db.Column(db.Integer)
+    
     def __str__(self):
         return f"{self.name} | {self.link} | {self.weapon_id} | {self.category}"
        
