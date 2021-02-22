@@ -1,5 +1,5 @@
 import os
-from app import db, create_app
+from app import db, create_app, mail
 from app.models import WeaponType, Weapon, Skin, RandomMessage
 
 app = create_app(os.environ["FLASK_ENV"])
@@ -9,6 +9,7 @@ def make_shell_processor():
     return dict(
         app = app,
         db = db,
+        mail = mail,
         WeaponType = WeaponType,
         Weapon = Weapon,
         Skin = Skin,

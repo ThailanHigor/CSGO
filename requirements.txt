@@ -4,3 +4,4 @@ SQLAlchemy
 Flask-Migrate
 flask_script
 flask_restful
+flask_mail

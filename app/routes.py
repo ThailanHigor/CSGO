@@ -11,3 +11,6 @@ def load(api):
     
     from .controllers.SkinScraping import SkinScraping
     api.add_resource(SkinScraping, "/skins-price")
+
+    from .controllers.Contact import Contact
+    api.add_resource(Contact, "/contact")
