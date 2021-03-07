@@ -1,0 +1,14 @@
+FROM python
+
+WORKDIR /skinMatcher
+
+EXPOSE 80
+EXPOSE 5000
+
+COPY requirements.txt .
+
+RUN pip3 install -r requirements.txt
+
+COPY . /skinMatcher
+
+CMD ["python3", "./application.py"]

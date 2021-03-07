@@ -2,7 +2,7 @@ import os
 from app import db, create_app, mail
 from app.models import WeaponType, Weapon, Skin, RandomMessage
 
-app = create_app(os.environ["development"])
+app = create_app("development")
 @app.shell_context_processor
 def make_shell_processor():
     return dict(
@@ -16,4 +16,4 @@ def make_shell_processor():
     )
 
 if __name__ == "__main__":
-    app.run(debug=True, port=80, host="0.0.0.0")
+    app.run(port=80, host="0.0.0.0")

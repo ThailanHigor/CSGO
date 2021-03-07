@@ -5,3 +5,7 @@ Flask-Migrate
 flask_script
 flask_restful
 flask_mail
+flask_cors
+python-dotenv
+requests
+bs4
